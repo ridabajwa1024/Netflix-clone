@@ -1,0 +1,99 @@
+
+body{
+  font-family: 'Poppins',sans-serif;
+}
+.login {
+  
+  background-image: url('../../Assets/loginbanner.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+position: relative;
+  background-color: rgba(0, 0, 0, 0.81); /* adds darkness */
+  background-blend-mode: darken; /* blends color with image */
+}
+.login-logo{
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  top: -20px;
+  left: 50px;
+}
+.login-form{
+background-color: rgba(50, 50, 50, 0.305);
+backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  text-align: start;
+  align-items: baseline;
+  width: 25%;
+  padding-block: 30px;
+  padding-inline: 20px;
+  height: 60%;
+  border-radius: 20px;
+}
+form{
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+justify-content: center;
+}
+form input{
+  width: 90%;
+  padding-inline: 20px;
+  padding-block: 10px;
+  border-radius: 4px;
+margin-top: 10px;
+outline: none;
+border: none;
+background-color: rgb(56, 55, 55);
+color: white;
+}
+form button{
+  width: 50%;
+  background-color: rgb(98, 0, 0);
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 17px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+form button:hover{
+  background-color: rgb(72, 3, 3);
+}
+.help{
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+  font-size: 12px;
+}
+.help::after{
+  content: '';
+  position: absolute;
+right: 25px;
+bottom: 84px;
+color: yellow;
+}
+.form-switch{
+font-size: 13px;
+  color: #737373;
+  line-height: 7px;
+ margin-top: 10px;
+}
+.form-switch span{
+    line-height: 7px;
+  font-size: 13px;
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+}
