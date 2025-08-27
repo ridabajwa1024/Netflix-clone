@@ -26,6 +26,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const user  = auth.currentUser;
+if(user){
+  const uid = user.uid;
+  alert("firebase uid " , uid)
+}
 const db = getFirestore(app);
 
 // ✅ SIGN UP (role = "user" OR "admin")

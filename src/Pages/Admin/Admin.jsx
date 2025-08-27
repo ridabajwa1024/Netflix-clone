@@ -12,7 +12,7 @@ function Admin() {
 
   const getMovies = async () =>
      {
-    const { data, error } = await supabase.from("movie").select("*");
+    const { data, error } = await supabase.from("movies").select("*");
     if (error) {
       console.log(error);
     } else {
@@ -31,7 +31,7 @@ function Admin() {
     }
     const UserFile = `${Date.now()}_${file.name}`;
     const { data: uploaded, error: uploadError } = await supabase.storage
-      .from("Netflix-clone-movies")
+      .from("User-Movies")
       .upload(UserFile, file);
     if (uploadError) {
       alert(uploadError);
@@ -39,12 +39,12 @@ function Admin() {
     }
 
     const { data: PublicLink } = supabase.storage
-      .from("Netflix-clone-movies")
+      .from("User-Movies")
       .getPublicUrl(UserFile);
     const UserFileUrl = PublicLink.publicUrl;
 
     const { error: insertError } = await supabase
-      .from("movie")
+      .from("movies")
       .insert([{ title: title, caption: caption, fileurl: UserFileUrl }]);
     if (insertError) {
       alert(insertError);
