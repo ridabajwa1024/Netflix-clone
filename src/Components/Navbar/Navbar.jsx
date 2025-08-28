@@ -4,11 +4,22 @@ import logo from '../../Assets/logo1.png';
 // Font Awesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faCaretDown, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+
+
+const Navbar = ({TrendingRef,TopRef,PopularRef}) => {
   const [open, setopen] = useState(false);
   const profileDropdown = useRef(null);
-
+  const navigate = useNavigate();
+  const ScrollSection = (ref)=>{
+if(ref && ref.current){
+  ref.current.scrollIntoView({ 
+    block : "center",
+    
+    behavior : "smooth"})
+}
+  }
   useEffect(() => {
     function handleclick(event) {
       if (profileDropdown.current && !profileDropdown.current.contains(event.target)) {
@@ -44,12 +55,12 @@ useEffect (()=>{
         <img src={logo} alt="logo" className="logo" />
         <ul>
           <li>Home</li>
-          <li>Trending</li>
-           <li>New & Popular</li>
-          <li>Top Rated</li>
-          <li>My List</li>
+          <li onClick={()=> ScrollSection(TrendingRef)} id='Trending'>Trending</li>
+           <li onClick={()=> ScrollSection(PopularRef)}  id='Popular'>New & Popular</li>
+          <li onClick={()=> ScrollSection(TopRef)}  id='Top'>Top Rated</li>
+          <li >My List</li>
           <li>Browse by Language</li>
-          <li>Login | Sign Up</li>
+          <li onClick={()=>navigate ("/login")}>Login | Sign Up</li>
         </ul>
       </div>
 

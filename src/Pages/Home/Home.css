@@ -1,6 +1,9 @@
 /* .hero{ */
     /* position: relative; */
 /* } */
+html{
+  scroll-behavior: smooth;
+}
 .hero-banner{
     position: relative;
 width:100%;

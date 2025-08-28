@@ -1,4 +1,5 @@
-import React from "react";
+
+import { useRef } from "react";
 import "./Home.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Titlecard from "../../Components/TitleCards/Titlecards";
@@ -9,9 +10,16 @@ import { faInfoCircle, faPlay } from "@fortawesome/free-solid-svg-icons";
 import main from "../../Assets/main.png";
 
 const Home = () => {
+const trendingRef = useRef(null);
+const topRef = useRef(null);
+const popularRef = useRef(null);
   return (
     <div className="home">
-      <Navbar />
+      <Navbar
+      TrendingRef={trendingRef}
+      TopRef={topRef}
+      PopularRef={popularRef}
+      />
       <div className="Hero">
         <img src={banner2} alt="hero-banner" className="hero-banner" />
         <div className="hero-caption">
@@ -36,13 +44,16 @@ const Home = () => {
           </div>
              
         </div>
-       <Titlecard title="Trending Now" category="trending" />
+       <div ref={trendingRef}>
+        <Titlecard title="Trending Now" category="trending" />
+       </div>
       </div>
 
       <div className="More-title">
       
-<Titlecard title="Popular On Netflix" category="popular" />
-<Titlecard title="Top Rated" category="top_rated" />
+<div ref={popularRef}><Titlecard title="Popular On Netflix" category="popular" /></div>
+<div ref={topRef}><Titlecard title="Top Rated" category="top_rated" /></div>
+
 <Titlecard title="Upcoming" category="upcoming" />
 <Titlecard title="Now Playing" category="now_playing" />
 
