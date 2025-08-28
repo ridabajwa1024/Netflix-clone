@@ -3,7 +3,7 @@ body{
     box-sizing: border-box;
 }
 .navbar{
-margin-left: 150px;
+margin-left: 80px;
 padding-inline: 20px;
 display: flex;
 justify-content:space-between;
@@ -15,7 +15,17 @@ color: #e5e5e5;
 z-index: 1000;
 transition: background-color 0.3s ease;
 }
-
+/* .navbar-left ul li button{ */
+/*  */
+/* background-color: rgb(98, 0, 0); */
+/* border: none; */
+/* color: white; */
+/* border-radius: 4px; */
+/* padding: 10px; */
+/* font-size: 17px; */
+/* cursor: pointer; */
+/*  */
+/* } */
 .navbar-right{
    
     display: flex;
@@ -85,15 +95,12 @@ cursor: pointer;
     top: 150%;
     right: 0%;
     z-index: 2000;
-display: none;
+display: block;
 }
-.profile-drop-down:hover{
-  background-color: rgb(95, 1, 1);
-  font-size: 15px;
-  overflow: hidden;
-}
+
 .profile:hover .profile-drop-down{
     display: block;
+    background-color: rgb(111, 5, 5);
 }
 ul li:hover{
 color:rgb(223, 18, 18);

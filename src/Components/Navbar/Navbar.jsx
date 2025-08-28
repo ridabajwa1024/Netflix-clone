@@ -44,11 +44,12 @@ useEffect (()=>{
         <img src={logo} alt="logo" className="logo" />
         <ul>
           <li>Home</li>
-          <li>TV Shows</li>
-          <li>Movies</li>
-          <li>New & Popular</li>
+          <li>Trending</li>
+           <li>New & Popular</li>
+          <li>Top Rated</li>
           <li>My List</li>
           <li>Browse by Language</li>
+          <li>Login | Sign Up</li>
         </ul>
       </div>
 

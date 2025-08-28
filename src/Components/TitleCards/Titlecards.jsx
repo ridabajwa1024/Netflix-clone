@@ -7,7 +7,7 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 export default function Titlecard({ title, category }) {
   const cardsRef = useRef(null);
   const [movies, setMovies] = useState([]);
-
+const NumberRef = useRef(null)
   useEffect(() => {
   let url = "";
 
@@ -33,6 +33,12 @@ export default function Titlecard({ title, category }) {
       behavior: "smooth",
     });
   };
+const ScrollNumber = (scroll)=>{
+NumberRef.current.scrollBy({
+  left: scroll === "left" ? -300 : 300,
+  behavior: "smooth",
+});
+  };
 
   return (
  
@@ -52,8 +58,8 @@ export default function Titlecard({ title, category }) {
               src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
               alt={movie.title || movie.name}
             />
-            <p>{movie.title || movie.name}</p>
-            <div className="movie-number">{index + 1}</div>
+            {/* <p>{movie.title || movie.name}</p> */}
+            <div ref={NumberRef} className="movie-number">{index + 1}</div>
           </div>
         ))
       ) : (
@@ -61,7 +67,7 @@ export default function Titlecard({ title, category }) {
       )}
     </div>
 
-    <button className="scroll-btn right" onClick={() => scrollcards("right")}>
+    <button className="scroll-btn right" onClick={() =>{ scrollcards("right");ScrollNumber("right")}}>
       <FontAwesomeIcon icon={faAngleRight} />
     </button>
   </div>
