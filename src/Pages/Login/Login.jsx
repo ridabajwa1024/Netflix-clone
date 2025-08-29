@@ -3,7 +3,7 @@ import loginlogo from "../../Assets/Netflix-removebg-preview.png";
 import "./login.css";
 import { login, signUp, getUserRole } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
+
 const Login = () => {
   const [signState, setsign] = useState("Sign In");
   const [name, setname] = useState("");

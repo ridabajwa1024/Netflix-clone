@@ -1,108 +1,130 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "../../supabase";
-import '../Admin/Admin.css';
+import "../Admin/Admin.css";
 
 function Admin() {
-  // cards
-  const [movies, setmovies] = useState([]);
-  const [title, settitle] = useState("");
-  const [caption, setcaption] = useState("");
-  // file uploaded by user
-  const [file, setfile] = useState(null);
+  const [title, setTitle] = useState("");
+  const [caption, setCaption] = useState("");
+  const [file, setFile] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const fileInputRef = useRef(null);
 
-  const getMovies = async () =>
-     {
-    const { data, error } = await supabase.from("movies").select("*");
-    if (error) {
-      console.log(error);
-    } else {
-      setmovies(data);
-    }
+  // File select karna
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
-
-  const HandleSubmit = async (e) => {
+  // Upload function
+  const handleUpload = async (e) => {
     e.preventDefault();
-    if (!file) {
-      alert("Upload your file !");
-    }
-    const UserFile = `${Date.now()}_${file.name}`;
-    const { data: uploaded, error: uploadError } = await supabase.storage
-      .from("User-Movies")
-      .upload(UserFile, file);
+    if (!file) return alert("Please select a file");
+
+    const filePath = `public/${Date.now()}-${file.name}`;
+
+    // 1️⃣ File storage me upload
+    const { error: uploadError } = await supabase.storage
+      .from("Netflix-clone-movies")
+      .upload(filePath, file);
+
     if (uploadError) {
-      alert(uploadError);
+      console.error(uploadError);
       return;
     }
 
-    const { data: PublicLink } = supabase.storage
-      .from("User-Movies")
-      .getPublicUrl(UserFile);
-    const UserFileUrl = PublicLink.publicUrl;
+    // 2️⃣ Public URL get karo
+    const {
+      data: { publicUrl },
+    } = supabase.storage
+      .from("Netflix-clone-movies")
+      .getPublicUrl(filePath);
 
+    // 3️⃣ Database me save karo
     const { error: insertError } = await supabase
       .from("movies")
-      .insert([{ title: title, caption: caption, fileurl: UserFileUrl }]);
+      .insert([{ title, caption, file_url: publicUrl }]);
+
     if (insertError) {
-      alert(insertError);
+      console.error(insertError);
     } else {
-      alert("Movies added succesfully");
-      settitle("");
-      setcaption("");
-      setfile(null);
-      getMovies();
+      fetchMovies(); // list refresh
+      setTitle("");
+      setCaption("");
+      setFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""; // ✅ input reset
+      }
     }
   };
+
+  // Movies fetch
+  const fetchMovies = async () => {
+    const { data, error } = await supabase
+      .from("movies")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (!error) setMovies(data);
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   return (
     <div className="admin-page">
       <h1>Welcome to Admin Page</h1>
-      <form onSubmit={HandleSubmit}>
+
+      <form onSubmit={handleUpload}>
         <h2>Upload Your Movies</h2>
         <input
-          onChange={(e) => {
-            settitle(e.target.value);
-          }}
-          value={title}
           type="text"
-          placeholder="movies title"
+          placeholder="Movie Title"
           required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <input
-          onChange={(e) => {
-            setcaption(e.target.value);
-          }}
-          value={caption}
           type="text"
           placeholder="Caption"
           required
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
         />
         <input
-          onChange={(e) => {
-            setfile(e.target.files[0]);
-          }}
-
           type="file"
-       
           required
+          onChange={handleFileChange}
+          ref={fileInputRef}
+          accept="image/*,video/*"
         />
-        <button type="submit">Sumit</button>
-        <button>Save</button>
+        <button type="submit">Upload</button>
       </form>
-      <div className="My-movies-Set">
+
+      <div  className="My-movies-Set">
         <h1>Your Movies</h1>
-        {movies.map((movie) => (
-          <div className="my-movie-card" key={movie.id}>
-            <img src={file} alt={movie.title} />
-            <h3>{movie.title}</h3>
-            <p>{movie.caption}</p>
-            <button>Delete</button>
-            <button>Edit</button>
-          </div>
-        ))}
+        <div className="movies-grid">
+          {movies.map((movie) => {
+            // ✅ check file type
+            const isVideo =
+              movie.file_url.endsWith(".mp4") ||
+              movie.file_url.endsWith(".mov") ||
+              movie.file_url.endsWith(".webm");
+
+            return (
+              <div className="movie-card" key={movie.id}>
+                {isVideo ? (
+                  <video src={movie.file_url} width="250" controls />
+                ) : (
+                  <img src={movie.file_url} alt={movie.title} width="250" />
+                )}
+                <div className="movie-info">
+                  <h2>{movie.title}</h2>
+                  <p>{movie.caption}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

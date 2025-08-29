@@ -21,3 +21,58 @@ border-radius: 10px;
     border-radius: 10px;
     background-color:indianred;
 }
+.My-movies-Set {
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.My-movies-Set h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff; /* Netflix-like white */
+}
+
+.movies-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* space between cards */
+  justify-content: center; /* center align */
+}
+
+.movie-card {
+  background: #111; /* dark card background */
+  border-radius: 12px;
+  overflow: hidden;
+  width: 250px; /* fixed width */
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img,
+.movie-card video {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 180px;
+  object-fit: cover; /* keeps aspect ratio */
+}
+
+.movie-info {
+  margin-top: 10px;
+}
+
+.movie-info h2 {
+  font-size: 18px;
+  color: #e50914; /* Netflix red */
+  margin: 5px 0;
+}
+
+.movie-info p {
+  font-size: 14px;
+  color: #ddd;
+}

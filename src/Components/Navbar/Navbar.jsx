@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "./navbar.css";
-import logo from '../../Assets/logo1.png';
+import logo1 from '../../Assets/logoBg.png'
 // Font Awesome imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faCaretDown, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -52,7 +52,7 @@ useEffect (()=>{
     <div  className={`navbar ${scrolled ? "scrolled" : ""}`} ref={scrollingNav}>
       {/* Left */}
       <div className="navbar-left">
-        <img src={logo} alt="logo" className="logo" />
+        <img src={logo1} alt="logo" className="logo" />
         <ul>
           <li>Home</li>
           <li onClick={()=> ScrollSection(TrendingRef)} id='Trending'>Trending</li>

@@ -11,9 +11,11 @@ const NumberRef = useRef(null)
   useEffect(() => {
   let url = "";
 
-  if (category === "trending") {
+  if (category === "trending") 
+    {
     url = "/trending/movie/week";
-  } else {
+  } else 
+    {
     url = `/movie/${category}`;
   }
 
