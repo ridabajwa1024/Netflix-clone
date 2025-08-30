@@ -1,7 +1,6 @@
 # 🎬 Netflix Clone  
 
 A **Netflix-inspired web application** built with **React.js** for practice and learning.  
-This project focuses on creating a clean UI, responsive design, and mimicking the feel of Netflix.  
 It may not be production-ready, but it reflects my journey of learning and improving as a developer.  
 
 ---
