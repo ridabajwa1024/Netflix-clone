@@ -1,6 +1,6 @@
-![Netflix Icon](https://upload.wikimedia.org/wikipedia/commons/6/69/Netflix_logo.svg)
-
-
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" width="200"/>
+</p>
 A **Netflix-inspired web application** built with **React.js** for practice and learning.  
 It may not be production-ready, but it reflects my journey of learning and improving as a developer.  
 
