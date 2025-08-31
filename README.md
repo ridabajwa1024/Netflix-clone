@@ -1,5 +1,5 @@
-# ![Netflix Logo](https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg)
- Netflix Clone  
+![Netflix Icon](https://upload.wikimedia.org/wikipedia/commons/6/69/Netflix_logo.svg)
+
 
 A **Netflix-inspired web application** built with **React.js** for practice and learning.  
 It may not be production-ready, but it reflects my journey of learning and improving as a developer.  
